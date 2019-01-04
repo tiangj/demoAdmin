@@ -30,6 +30,7 @@ layui.use('table', function () {
             , {
                 filed: 'cz', title: '操作', width: '10%', templet: function (d) {
                     var html = "";
+                    html += '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>';
                     html += '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
                     return html;
                 }
@@ -66,6 +67,9 @@ layui.use('table', function () {
                 })
 
             });
+        }else if (obj.event === 'edit') {
+            x_admin_show('修改商品类型信息', 'wwqSort/toAdd?id=' + data.id, 800, 600);
+            //图片上传页面
         }
     });
 

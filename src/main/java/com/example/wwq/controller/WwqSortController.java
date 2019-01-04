@@ -3,6 +3,7 @@ package com.example.wwq.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.example.config.ConstantUtil;
 import com.example.wwq.entity.WwqBanner;
 import com.example.wwq.entity.WwqSort;
 import com.example.wwq.kit.JSONResult;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -121,10 +124,16 @@ private IWwqSortService wwqSortService;
      */
     @RequestMapping("saveSort")
     @ResponseBody
-    public Map<String,Object> saveSort(WwqSort wwqSort){
+    public Map<String,Object> saveSort(WwqSort wwqSort, HttpServletRequest request){
+        String userId=request.getSession().getAttribute(ConstantUtil.SEESION_USER_ID).toString();
+
         Boolean flag=false;
         Map<String,Object> result=new HashMap<>();
         if(StringUtils.isNotBlank(wwqSort.getId())){
+            wwqSort.setCreateDate(new Date());
+            wwqSort.setUpdateDate(new Date());
+            wwqSort.setCreateUser(userId);
+            wwqSort.setUpdateUser(userId);
             flag=wwqSortService.updateById(wwqSort);
         }else{
             flag=wwqSortService.insert(wwqSort);
