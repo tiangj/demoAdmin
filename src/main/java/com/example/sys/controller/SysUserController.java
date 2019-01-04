@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.example.sys.entity.SysUser;
 import com.example.sys.service.ISysUserService;
 import com.example.util.MD5Util;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,8 +44,12 @@ public class SysUserController {
         sysUserPage.setLimit(limit);
         sysUserPage.setCurrent(page);
         EntityWrapper<SysUser> userEntityWrapper=new EntityWrapper<>();
-        userEntityWrapper.like("login_name",username);
-        userEntityWrapper.like("name",name);
+        if(StringUtils.isNotBlank(username)){
+            userEntityWrapper.like("login_name",username);
+        }
+        if(StringUtils.isNotBlank(name)){
+            userEntityWrapper.like("name",name);
+        }
 
         Page<SysUser> userPage=sysUserService.selectPage(sysUserPage,userEntityWrapper);
         Map<String,Object> result=new HashMap<>();

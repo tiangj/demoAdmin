@@ -12,11 +12,12 @@
         <result column="update_date" property="updateDate" />
         <result column="update_user" property="updateUser" />
         <result column="delete_flag" property="deleteFlag" />
+        <result column="sort" property="sort"></result>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, file_path AS filePath, remark, create_date AS createDate, create_user AS createUser, update_date AS updateDate, update_user AS updateUser, delete_flag AS deleteFlag
+        id, file_path AS filePath, remark, create_date AS createDate, create_user AS createUser, update_date AS updateDate, update_user AS updateUser, delete_flag AS deleteFlag,sort
     </sql>
 
     <select id="shopBannerList" resultType="java.util.Map" parameterType="java.lang.String">

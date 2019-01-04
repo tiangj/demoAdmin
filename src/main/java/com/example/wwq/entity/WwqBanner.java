@@ -6,6 +6,9 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 
 /**
@@ -34,6 +37,7 @@ public class WwqBanner extends Model<WwqBanner> {
     /**
      * 创建日期
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @TableField("create_date")
     private Date createDate;
     /**
@@ -56,6 +60,9 @@ public class WwqBanner extends Model<WwqBanner> {
      */
     @TableField("delete_flag")
     private Integer deleteFlag;
+
+    @TableField("sort")
+    private Integer sort;
 
 
     public String getId() {
@@ -122,6 +129,14 @@ public class WwqBanner extends Model<WwqBanner> {
         this.deleteFlag = deleteFlag;
     }
 
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
     public static final String ID = "id";
 
     public static final String FILE_PATH = "file_path";
@@ -137,6 +152,8 @@ public class WwqBanner extends Model<WwqBanner> {
     public static final String UPDATE_USER = "update_user";
 
     public static final String DELETE_FLAG = "delete_flag";
+
+    public static final String SORT="sort";
 
     @Override
     protected Serializable pkVal() {
@@ -154,6 +171,7 @@ public class WwqBanner extends Model<WwqBanner> {
         ", updateDate=" + updateDate +
         ", updateUser=" + updateUser +
         ", deleteFlag=" + deleteFlag +
+                ",sort="+sort+
         "}";
     }
 }

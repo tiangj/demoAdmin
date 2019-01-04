@@ -13,6 +13,7 @@ import com.example.wwq.kit.JSONResult;
 import com.example.wwq.service.IWwqProductFileService;
 import com.example.wwq.service.IWwqProductService;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -126,7 +127,9 @@ public class WwqProductController {
         productDOPage.setLimit(limit);
         productDOPage.setCurrent(page);
         ProductDO productDO=new ProductDO();
-        productDO.setProductName(productName);
+        if(StringUtils.isNotBlank(productName)){
+            productDO.setProductName(productName);
+        }
         Page<ProductDO> pageList=wwqProductService.getAllProduct(productDOPage,productDO);
         Map<String,Object> result=new HashMap<>();
         result.put("code",0);
