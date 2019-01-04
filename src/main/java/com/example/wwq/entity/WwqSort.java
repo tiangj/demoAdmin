@@ -6,6 +6,8 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 
 /**
@@ -46,6 +48,7 @@ public class WwqSort extends Model<WwqSort> {
     /**
      * 创建日期
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @TableField("create_date")
     private Date createDate;
     /**
@@ -66,6 +69,7 @@ public class WwqSort extends Model<WwqSort> {
     /**
      * 是否删除
      */
+    @TableField("deleteFlag")
     private Integer deleteFlag;
     /**
      * 是否展示在首页（0：展示；1：不展示）
