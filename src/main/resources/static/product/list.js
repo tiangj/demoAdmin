@@ -106,6 +106,9 @@ $(function () {
             active[type] ? active[type].call(this) : '';
         });
     });
+
+
+
 });
 
 function addProductPic(id) {

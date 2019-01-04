@@ -36,12 +36,9 @@
         <div class="layui-inline">
             <label class="layui-form-label">商品类型</label>
             <div class="layui-input-inline">
-                <select name="sortId" th:field="*{sortId}">
-                    <option value=""></option>
-                    <option value="1" th:selected="*{sortId==1}">健康检查</option>
-                    <option value="2" th:selected="*{sortId==2}">健康理疗</option>
-                    <option value="3" th:selected="*{sortId==3}">保健药</option>
-                    <option value="4" th:selected="*{sortId==4}">医疗手环</option>
+                <select name="sortId">
+                    <option th:each="list,userStat:${sortList}" th:value="${list.id}" th:text="${list.name}"
+                            th:selected="${list.id == productAddDO.sortId}"></option>
                 </select>
             </div>
         </div>

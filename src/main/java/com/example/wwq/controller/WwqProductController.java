@@ -9,9 +9,11 @@ import com.example.wwq.DO.ProductAddDO;
 import com.example.wwq.DO.ProductDO;
 import com.example.wwq.entity.WwqProduct;
 import com.example.wwq.entity.WwqProductFile;
+import com.example.wwq.entity.WwqSort;
 import com.example.wwq.kit.JSONResult;
 import com.example.wwq.service.IWwqProductFileService;
 import com.example.wwq.service.IWwqProductService;
+import com.example.wwq.service.IWwqSortService;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,9 @@ public class WwqProductController {
 
     @Autowired
     private IWwqProductFileService wwqProductFileService;
+
+    @Autowired
+    private IWwqSortService wwqSortService;
 
 
     /**
@@ -148,6 +153,9 @@ public class WwqProductController {
             productAddDO = wwqProductService.getProductById(id);
         }
         model.addAttribute("productAddDO",productAddDO);
+        EntityWrapper<WwqSort> entityWrapper=new EntityWrapper<>();
+        List<WwqSort> sortList=wwqSortService.selectList(entityWrapper);
+        model.addAttribute("sortList",sortList);
         return "product/add";
     }
 

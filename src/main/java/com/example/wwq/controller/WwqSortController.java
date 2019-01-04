@@ -4,7 +4,6 @@ package com.example.wwq.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.example.config.ConstantUtil;
-import com.example.wwq.entity.WwqBanner;
 import com.example.wwq.entity.WwqSort;
 import com.example.wwq.kit.JSONResult;
 import com.example.wwq.service.IWwqSortService;
