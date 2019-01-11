@@ -1,5 +1,8 @@
 package com.example.wwq.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.example.wwq.DO.ProductDO;
+import com.example.wwq.DO.UserListDO;
 import com.example.wwq.entity.WwqUser;
 import com.baomidou.mybatisplus.service.IService;
 
@@ -12,5 +15,7 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-12-29
  */
 public interface IWwqUserService extends IService<WwqUser> {
+
+    Page<UserListDO> getAllUser(Page<UserListDO> page, UserListDO userListDO);
 
 }

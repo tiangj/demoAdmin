@@ -130,5 +130,16 @@ public class WwqOrderController {
 //        List<Map<String,Object>> shopProduct = wwqOrderService.shopProductOrderDetail(userId,orderId,orderStatus);
 //        return JSONResult.init(200, "success",shopProduct);
 //    }
+
+    @RequestMapping("list")
+    public String list(){
+        return "order/list";
+    }
+
+    @ResponseBody
+    @RequestMapping("listData")
+    public Map<String,Object> listData(Integer page, Integer limit,String nickname){
+        return null;
+    }
 }
 
