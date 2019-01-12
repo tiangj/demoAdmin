@@ -45,9 +45,9 @@ layui.use('table', function () {
                 filed: 'cz', title: '操作', width: '20%', templet: function (d) {
                     var html = "";
                     html += '<a class="layui-btn layui-btn-xs" lay-event="viewOrderDetail">查看详情</a>';
-                    // if(d.payStatus==200 && (d.orderStatus==200 || d.orderStatus==300)){
+                    if(d.payStatus==200 && (d.orderStatus==200 || d.orderStatus==300)){
                         html += '<a class="layui-btn layui-btn-xs" lay-event="sendProduct">发货</a>';
-                    // }
+                    }
                     return html;
                 }
             }
@@ -114,7 +114,8 @@ function showTip(id,content,url) {
                 async:true,
                 success:function(res){
                     if(res.code==1){
-                        layer.msg(res.msg,{icon:6})
+                        layer.msg(res.msg,{icon:6});
+                        layer.closeAll();
                     }else{
                         layer.msg(res.msg,{icon:5});
                     }
