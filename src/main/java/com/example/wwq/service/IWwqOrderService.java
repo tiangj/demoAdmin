@@ -5,6 +5,8 @@ import com.example.wwq.DO.OrderListDO;
 import com.example.wwq.entity.WwqOrder;
 import com.baomidou.mybatisplus.service.IService;
 
+import java.util.Map;
+
 
 /**
  * <p>
@@ -30,5 +32,7 @@ public interface IWwqOrderService extends IService<WwqOrder> {
       Page<OrderListDO> getAllOrder(Page<OrderListDO> page, OrderListDO orderListDO);
 
       OrderListDO getOrderById(String id);
+
+      Map<String,Object> updateOrderStatus(String orderId) throws Exception;
 
 }

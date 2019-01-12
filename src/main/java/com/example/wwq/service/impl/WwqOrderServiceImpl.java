@@ -1,13 +1,21 @@
 package com.example.wwq.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.example.wwq.DO.OrderListDO;
 import com.example.wwq.entity.WwqOrder;
+import com.example.wwq.entity.WwqOrderDetail;
+import com.example.wwq.mapper.WwqOrderDetailMapper;
 import com.example.wwq.mapper.WwqOrderMapper;
 import com.example.wwq.service.IWwqOrderService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -24,6 +32,9 @@ public class WwqOrderServiceImpl extends ServiceImpl<WwqOrderMapper, WwqOrder> i
     @Autowired
     private WwqOrderMapper wwqOrderMapper;
 
+    @Autowired
+    private WwqOrderDetailMapper wwqOrderDetailMapper;
+
     @Override
     public Page<OrderListDO> getAllOrder(Page<OrderListDO> page, OrderListDO orderListDO) {
         page.setRecords(wwqOrderMapper.getAllOrder(page,orderListDO));
@@ -33,6 +44,34 @@ public class WwqOrderServiceImpl extends ServiceImpl<WwqOrderMapper, WwqOrder> i
     @Override
     public OrderListDO getOrderById(String id) {
         return wwqOrderMapper.getOrderById(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Map<String,Object> updateOrderStatus(String orderId) throws Exception {
+        Integer flag=0;
+        WwqOrder wwqOrder=new WwqOrder();
+        wwqOrder.setId(orderId);
+        wwqOrder.setOrderStatus(400);
+        flag=wwqOrderMapper.updateById(wwqOrder);
+
+        EntityWrapper<WwqOrderDetail> entityWrapper=new EntityWrapper<>();
+        entityWrapper.eq("order_id",orderId);
+        List<WwqOrderDetail> orderDetailList=wwqOrderDetailMapper.selectList(entityWrapper);
+
+        for (WwqOrderDetail wwqOrderDetail:orderDetailList){
+            wwqOrderDetail.setOrderStatus(400);
+            flag=wwqOrderDetailMapper.updateById(wwqOrderDetail);
+        }
+        Map<String,Object> result=new HashMap<>();
+        if(flag>0){
+            result.put("code",1);
+            result.put("msg","操作成功");
+        }else {
+            result.put("code",0);
+            result.put("msg","操作失败");
+        }
+        return result;
     }
 //
 //    @Autowired

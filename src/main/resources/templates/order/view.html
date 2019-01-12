@@ -60,6 +60,10 @@
             <div class="layui-input-inline" th:switch="*{orderStatus}">
                 <input type="text" name="orderStatus" th:case="100" autocomplete="off" class="layui-input" value="未支付"/>
                 <input type="text" name="orderStatus" th:case="200" autocomplete="off" class="layui-input" value="已支付"/>
+                <input type="text" name="orderStatus" th:case="300" autocomplete="off" class="layui-input" value="门店备货"/>
+                <input type="text" name="orderStatus" th:case="400" autocomplete="off" class="layui-input" value="发货"/>
+                <input type="text" name="orderStatus" th:case="500" autocomplete="off" class="layui-input" value="评价"/>
+                <input type="text" name="orderStatus" th:case="600" autocomplete="off" class="layui-input" value="订单完成"/>
             </div>
         </div>
     </div>
@@ -80,9 +84,19 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">创建时间</label>
-        <div class="layui-input-block">
-            <input type="text" name="productName"  th:value="${#dates.format(orderInfo.createDate, 'yyyy-MM-dd HH:mm:ss')}" autocomplete="off" class="layui-input">
+        <div class="layui-inline">
+            <label class="layui-form-label">支付状态</label>
+            <div class="layui-input-inline" th:switch="*{payStatus}">
+                <input type="text" name="payStatus" th:case="100" autocomplete="off" class="layui-input" value="未支付"/>
+                <input type="text" name="payStatus" th:case="200" autocomplete="off" class="layui-input" value="已支付"/>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="productName"  th:value="${#dates.format(orderInfo.createDate, 'yyyy-MM-dd HH:mm:ss')}" autocomplete="off" class="layui-input">
+            </div>
         </div>
     </div>
 

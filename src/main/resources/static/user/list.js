@@ -31,7 +31,7 @@ layui.use('table', function () {
             , {
                 filed: 'cz', title: '操作', width: '25%', templet: function (d) {
                     var html = "";
-                    html += '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="viewUser">查看用户详情详情</a>';
+                    // html += '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="viewUser">查看用户详情详情</a>';
                     html += '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="viewScore">查看积分详情</a>';
                     return html;
                 }

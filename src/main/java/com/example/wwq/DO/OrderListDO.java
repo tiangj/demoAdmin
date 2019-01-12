@@ -24,6 +24,8 @@ public class OrderListDO {
 
     private String orderStatus;
 
+    private String payStatus;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
 
@@ -135,5 +137,13 @@ public class OrderListDO {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(String payStatus) {
+        this.payStatus = payStatus;
     }
 }

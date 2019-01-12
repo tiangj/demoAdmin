@@ -93,7 +93,7 @@
         SELECT o.user_id as userId,u.nickname as nickName,
                     p.product_name as productName,o.product_id as productId,
                     o.id as orderId,o.order_num as orderNum,o.order_total_price as orderTotalNum,
-                    o.post_way_type as postWayType,o.pay_status as orderStatus,o.create_date as createDate,
+                    o.post_way_type as postWayType,o.order_status as orderStatus,o.pay_status as payStatus,o.create_date as createDate,
                     d.post_date_name as postDate,a.address,o.message
         from wwq_order o
             left join wwq_user u on u.id=o.user_id
@@ -110,7 +110,7 @@
       SELECT o.user_id as userId,u.nickname as nickName,
                     p.product_name as productName,o.product_id as productId,
                     o.id as orderId,o.order_num as orderNum,o.order_total_price as orderTotalNum,
-                    o.post_way_type as postWayType,o.pay_status as orderStatus,o.create_date as createDate,
+                    o.post_way_type as postWayType,o.order_status as orderStatus,o.pay_status as payStatus,o.create_date as createDate,
                     d.post_date_name as postDate,a.address,o.message
         from wwq_order o
             left join wwq_user u on u.id=o.user_id

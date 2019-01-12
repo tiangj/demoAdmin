@@ -3,6 +3,9 @@ package com.example.wwq.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.example.wwq.DO.OrderListDO;
+import com.example.wwq.entity.WwqOrder;
+import com.example.wwq.entity.WwqOrderDetail;
+import com.example.wwq.service.IWwqOrderDetailService;
 import com.example.wwq.service.IWwqOrderService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +35,9 @@ public class WwqOrderController {
 
     @Autowired
     private IWwqOrderService wwqOrderService;
+
+    @Autowired
+    private IWwqOrderDetailService wwqOrderDetailService;
 //
 //    /**
 //     * 从购物车下预定单
@@ -161,6 +168,20 @@ public class WwqOrderController {
         OrderListDO orderListDO = wwqOrderService.getOrderById(orderId);
         model.addAttribute("orderInfo",orderListDO);
         return "order/view";
+    }
+
+    @ResponseBody
+    @RequestMapping("sendProduct")
+    public Map<String,Object> sendProduct(String orderId){
+        Map<String,Object> result=new HashMap<>();
+        try {
+            result=wwqOrderService.updateOrderStatus(orderId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("code",0);
+            result.put("msg","操作失败");
+        }
+        return result;
     }
 }
 

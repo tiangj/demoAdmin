@@ -129,6 +129,25 @@ function x_admin_show(title,url,w,h){
     });
 }
 
+function showTip(id,content,url) {
+    layer.open({
+        type: 1
+        ,title: false //不显示标题栏
+        ,closeBtn: false
+        ,area: '300px;'
+        ,shade: 0.8
+        ,id: id //设定一个id，防止重复弹出
+        ,btn: ['确认', '关闭']
+        ,btnAlign: 'c'
+        ,moveType: 1 //拖拽模式，0或者1
+        ,content: content
+        ,yes: function(){
+
+        }
+
+    });
+}
+
 /*关闭弹出框口*/
 function x_admin_close(){
     var index = parent.layer.getFrameIndex(window.name);
