@@ -16,8 +16,8 @@ layui.use('table', function () {
                     return html;
                 }
             }
-            , {field: 'phone', title: '手机号', width: '10%', sort: true}
-            , {field: 'sex', title: '性别', width: '10%', templet: function (d) {
+            , {field: 'phone', title: '手机号', width: '15%', sort: true}
+            , {field: 'sex', title: '性别', width: '6%', templet: function (d) {
                     if(d.sex==1){
                         return "男";
                     }else if(d.sex==0){
@@ -45,12 +45,12 @@ layui.use('table', function () {
         }
     });
     //监听工具条
-    table.on('tool(banner)', function (obj) {
+    table.on('tool(user)', function (obj) {
         var data = obj.data;
         if (obj.event === 'viewUser') {
 
         }else if(obj.event==='viewScore'){
-            x_admin_show('查看用户积分信息'+"【"+data.nickName+"】", 'wwqUserScore/showScoreInfo?userId=' + data.id, 1000, 800);
+            x_admin_show('查看用户积分信息'+"【"+data.nickName+"】", 'wwqUserScore/showScoreInfo?userId=' + data.id, 600, 400);
         }
     });
 

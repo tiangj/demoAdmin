@@ -5,20 +5,25 @@ layui.use('table', function () {
     table.render({
         elem: '#LAY_table_userScore'
         , url: ctxPath + 'wwqUserScore/listData'
+        , where:{userId:$("#userId").val()}
         , cols: [[
-            {field: 'id', hide: true}
-            , {field: 'nickName', title: '用户昵称', width: '10%', sort: true}
-            , {field: 'phone', title: '手机号', width: '10%', sort: true}
-            , {field: 'sex', title: '性别', width: '10%'}
-            , {field: 'score', title: '可用积分', width: '10%'}
-            , {field: 'consumeScore', title: '消费积分', width: '10%'}
-            , {field: 'createDate', title: '创建时间', width: '15%', sort: true}
+            {field: 'userId', hide: true}
+            , {field: 'integralDetail', title: '积分', width: '20%', sort: true}
+            , {field: 'productName', title: '商品名称', width: '20%', sort: true}
+            , {field: 'wayType', title: '积分进出方式', width: '20%', sort: true, templet: function (d) {
+                        if(d.wayType==1){
+                            return "获取";
+                        }else if(d.wayType==2){
+                            return "消费";
+                        }
+                    }
+               }
+            , {field: 'createDate', title: '创建时间', width: '20%', sort: true}
         ]]
         , id: 'testReload'
         , page: true
-        , height: height
         , done: function (res, curr, count) {
-            $("[data-field='id']").css('display', 'none');
+            $("[data-field='userId']").css('display', 'none');
         }
     });
 

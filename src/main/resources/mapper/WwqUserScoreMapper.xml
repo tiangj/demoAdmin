@@ -21,4 +21,10 @@
         id, user_id AS userId, score, consume_score AS consumeScore, remark, create_date AS createDate, create_user AS createUser, update_date AS updateDate, update_user AS updateUser, delete_flag AS deleteFlag
     </sql>
 
+    <select id="getAllUserScore" resultType="com.example.wwq.DO.UserScoreListDO" parameterType="com.example.wwq.DO.UserScoreListDO">
+        SELECT i.integral_detail as integralDetail,i.product_id as productId,p.product_name as productName,
+            i.way_type as wayType,i.create_date as createDate,i.user_id as userId
+            from wwq_integral i left join wwq_product p on p.id=i.product_id
+        where i.delete_flag=0 and i.user_id =#{userId}
+    </select>
 </mapper>

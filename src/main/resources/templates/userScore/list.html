@@ -10,8 +10,15 @@
     <link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
     <script th:src="@{/userScore/list.js}"></script>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        ctxPath = /*[[@{/}]]*/ '';
+        /*]]>*/
+        console.info(ctxPath);
+    </script>
 </head>
 <body>
+<input type="hidden" id="userId" th:value="${userId}"/>
 <table class="layui-hide" id="LAY_table_userScore" lay-filter="userScore" ></table>
 </body>
 </body>
