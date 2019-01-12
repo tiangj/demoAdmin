@@ -27,8 +27,7 @@ public class OrderListDO {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date postDate;
+    private String postDate;
 
     private String addressName;
 
@@ -114,11 +113,11 @@ public class OrderListDO {
         this.createDate = createDate;
     }
 
-    public Date getPostDate() {
+    public String getPostDate() {
         return postDate;
     }
 
-    public void setPostDate(Date postDate) {
+    public void setPostDate(String postDate) {
         this.postDate = postDate;
     }
 

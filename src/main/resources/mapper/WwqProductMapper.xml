@@ -22,14 +22,14 @@
         <result column="create_user" property="createUser" />
         <result column="update_date" property="updateDate" />
         <result column="update_user" property="updateUser" />
-        <result column="deleteFlag" property="deleteFlag" />
+        <result column="delete_flag" property="deleteFlag" />
         <result column="recommend_boutique" property="recommendBoutique" />
         <result column="product_type" property="productType"></result>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, product_name AS productName, product_orgin_price AS productOrginPrice, product_now_price AS productNowPrice, product_num AS productNum, post_price AS postPrice, recommend_brand AS recommendBrand, sell_num AS sellNum, remain_num AS remainNum, product_dec AS productDec, sort_id AS sortId, scope_id AS scopeId, sort, remark, create_date AS createDate, create_user AS createUser, update_date AS updateDate, update_user AS updateUser, deleteFlag, recommend_boutique AS recommendBoutique
+        id, product_name AS productName, product_orgin_price AS productOrginPrice, product_now_price AS productNowPrice, product_num AS productNum, post_price AS postPrice, recommend_brand AS recommendBrand, sell_num AS sellNum, remain_num AS remainNum, product_dec AS productDec, sort_id AS sortId, scope_id AS scopeId, sort, remark, create_date AS createDate, create_user AS createUser, update_date AS updateDate, update_user AS updateUser,delete_flag as deleteFlag, recommend_boutique AS recommendBoutique
     </sql>
 
 
@@ -111,7 +111,7 @@
             p.id, p.product_name AS productName, p.product_orgin_price AS productOrginPrice, p.product_now_price AS productNowPrice, p.product_num AS productNum,
             p.post_price AS postPrice, p.recommend_brand AS recommendBrand, p.sell_num AS sellNum, p.remain_num AS remainNum,
             p.product_dec AS productDec, p.sort_id AS sortId, p.scope_id AS scopeId, p.sort, p.remark, p.create_date AS createDate,
-            p.create_user AS createUser, p.update_date AS updateDate, p.update_user AS updateUser, p.deleteFlag, p.recommend_boutique AS recommendBoutique,
+            p.create_user AS createUser, p.update_date AS updateDate, p.update_user AS updateUser, p.delete_flag as deleteFlag, p.recommend_boutique AS recommendBoutique,
             p.product_type as productType,
             pd.id as detailId,pd.post_way_id as postWayId,pd.delivery_area_id as deliveryAreaId,pd.remark as detailRemark
         FROM

@@ -1,3 +1,4 @@
+var height = $(document.body).height() * 0.8;
 
 layui.use('table', function () {
     var table = layui.table;
@@ -6,49 +7,46 @@ layui.use('table', function () {
         elem: '#LAY_table_order'
         , url: ctxPath + 'wwqOrder/listData'
         , cols: [[
-            {field: 'id', hide: true}
+            {field: 'userId', hide: true}
+            ,{field: 'productId', hide: true}
+            ,{field: 'orderId', hide: true}
             , {field: 'nickName', title: '用户昵称', width: '10%', sort: true}
-            , {field: 'headimgurl', title: '微信图像', width: '10%', templet: function (d) {
-                    var html="";
-                    html='<a href="'+d.headimgurl+'" target="_blank"><img  src="'+d.headimgurl+'" style="width: 200px;height: 200px"/></a>';
+            , {field: 'productName', title: '商品名称', width: '15%', sort: true}
+            , {field: 'orderNum', title: '商品数', width: '10%'}
+            , {field: 'orderTotalNum', title: '订单总金额', width: '10%'}
+            , {field: 'orderStatus', title: '订单状态', width: '10%'}
+            , {field: 'message', title: '买家留言', width: '15%'}
+            , {field: 'createDate', title: '创建时间', width: '15%', sort: true}
+            , {
+                filed: 'cz', title: '操作', width: '15%', templet: function (d) {
+                    var html = "";
+                    html += '<a class="layui-btn layui-btn-xs" lay-event="viewOrderDetail">查看详情</a>';
                     return html;
                 }
             }
-            , {field: 'phone', title: '手机号', width: '10%', sort: true}
-            , {field: 'sex', title: '性别', width: '10%', templet: function (d) {
-                    if(d.sex==1){
-                        return "男";
-                    }else if(d.sex==0){
-                        return "女";
-                    }
-                }
-            }
-            , {field: 'score', title: '可用积分', width: '10%'}
-            , {field: 'consumeScore', title: '消费积分', width: '10%'}
-            , {field: 'createDate', title: '创建时间', width: '15%', sort: true}
         ]]
         , id: 'testReload'
         , page: true
         , height: height
         , done: function (res, curr, count) {
-            $("[data-field='id']").css('display', 'none');
+            $("[data-field='userId']").css('display', 'none');
+            $("[data-field='productId']").css('display', 'none');
+            $("[data-field='orderId']").css('display', 'none');
         }
     });
     //监听工具条
-    table.on('tool(banner)', function (obj) {
+    table.on('tool(order)', function (obj) {
         var data = obj.data;
-        if (obj.event === 'viewUser') {
-
-        }else if(obj.event==='viewScore'){
-            x_admin_show('查看订单信息'+"【"+data.nickName+"】", 'wwqUserScore/showScoreInfo?userId=' + data.id, 1000, 800);
+         if(obj.event==='viewOrderDetail'){
+            x_admin_show('查看订单信息', 'wwqOrder/showOrderDetail?orderId=' + data.orderId, 800, 500);
         }
     });
 
     var $ = layui.$, active = {
         reload: function () {
-            var nickname = $('#nickname').val();
+            var productName = $('#productName').val();
             var data = {
-                nickname: nickname
+                productName: productName
             }
             //执行重载
             table.reload('testReload', {
@@ -60,7 +58,7 @@ layui.use('table', function () {
         }
     };
 
-    $('.userTable .layui-btn').on('click', function () {
+    $('.orderTable .layui-btn').on('click', function () {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });

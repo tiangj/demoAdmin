@@ -28,6 +28,14 @@ layui.use('table', function () {
             , {field: 'score', title: '可用积分', width: '10%'}
             , {field: 'consumeScore', title: '消费积分', width: '10%'}
             , {field: 'createDate', title: '创建时间', width: '15%', sort: true}
+            , {
+                filed: 'cz', title: '操作', width: '25%', templet: function (d) {
+                    var html = "";
+                    html += '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="viewUser">查看用户详情详情</a>';
+                    html += '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="viewScore">查看积分详情</a>';
+                    return html;
+                }
+            }
         ]]
         , id: 'testReload'
         , page: true

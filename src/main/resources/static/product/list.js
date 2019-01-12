@@ -81,7 +81,7 @@ $(function () {
 
                 });
             } else if (obj.event === 'edit') {
-                x_admin_show('修改商品信息', 'wwqProduct/addProduct?id=' + data.productId, 1000, 800);
+                x_admin_show('修改商品信息', 'wwqProduct/addProduct?id=' + data.productId, 900, 600);
                 //图片上传页面
             }
         });

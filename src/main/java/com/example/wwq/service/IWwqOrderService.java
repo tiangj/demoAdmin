@@ -1,11 +1,10 @@
 package com.example.wwq.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.example.wwq.DO.OrderListDO;
 import com.example.wwq.entity.WwqOrder;
 import com.baomidou.mybatisplus.service.IService;
-import com.github.pagehelper.PageInfo;
 
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -27,4 +26,9 @@ public interface IWwqOrderService extends IService<WwqOrder> {
 //    Map<String,Object> getStatusNumBystatus(String userId);
 //
 //    List<Map<String,Object>> shopProductOrderDetail(String userId,String orderId,Integer orderStatus);
+
+      Page<OrderListDO> getAllOrder(Page<OrderListDO> page, OrderListDO orderListDO);
+
+      OrderListDO getOrderById(String id);
+
 }

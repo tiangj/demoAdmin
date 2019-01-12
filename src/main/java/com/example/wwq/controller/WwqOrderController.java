@@ -1,18 +1,19 @@
 package com.example.wwq.controller;
 
 
-import com.example.wwq.kit.JSONResult;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.example.wwq.DO.OrderListDO;
 import com.example.wwq.service.IWwqOrderService;
-import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,8 +29,8 @@ import java.util.Map;
 public class WwqOrderController {
 
 
-//    @Autowired
-//    private IWwqOrderService wwqOrderService;
+    @Autowired
+    private IWwqOrderService wwqOrderService;
 //
 //    /**
 //     * 从购物车下预定单
@@ -138,8 +139,28 @@ public class WwqOrderController {
 
     @ResponseBody
     @RequestMapping("listData")
-    public Map<String,Object> listData(Integer page, Integer limit,String nickname){
-        return null;
+    public Map<String,Object> listData(Integer page, Integer limit,String productName){
+        Page<OrderListDO> orderListDOPage=new Page<>();
+        orderListDOPage.setLimit(limit);
+        orderListDOPage.setCurrent(page);
+        OrderListDO orderListDO=new OrderListDO();
+        if(StringUtils.isNotBlank(productName)){
+            orderListDO.setProductName(productName);
+        }
+        Page<OrderListDO> pageList=wwqOrderService.getAllOrder(orderListDOPage,orderListDO);
+        Map<String,Object> result=new HashMap<>();
+        result.put("code",0);
+        result.put("msg","");
+        result.put("count",pageList.getTotal());
+        result.put("data",pageList.getRecords());
+        return result;
+    }
+
+    @RequestMapping("showOrderDetail")
+    public String showOrderDetail(Model model, String orderId){
+        OrderListDO orderListDO = wwqOrderService.getOrderById(orderId);
+        model.addAttribute("orderInfo",orderListDO);
+        return "order/view";
     }
 }
 
