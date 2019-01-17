@@ -159,11 +159,14 @@ public class WwqProductController {
             EntityWrapper<WwqProductDetail> detailEntityWrapper=new EntityWrapper<>();
             detailEntityWrapper.eq("shop_product_id",id);
             WwqProductDetail wwqProductDetail=wwqProductDetailService.selectOne(detailEntityWrapper);
-            productAddDO.setDeliveryAreaId(wwqProductDetail.getDeliveryAreaId());
-            productAddDO.setPostDateId(wwqProductDetail.getPostDateId());
-            productAddDO.setPostWayId(wwqProductDetail.getPostWayId());
-            productAddDO.setDetailId(wwqProductDetail.getId());
-            productAddDO.setDetailRemark(wwqProductDetail.getRemark());
+            if(wwqProductDetail!=null){
+                productAddDO.setDeliveryAreaId(wwqProductDetail.getDeliveryAreaId());
+                productAddDO.setPostDateId(wwqProductDetail.getPostDateId());
+                productAddDO.setPostWayId(wwqProductDetail.getPostWayId());
+                productAddDO.setDetailId(wwqProductDetail.getId());
+                productAddDO.setDetailRemark(wwqProductDetail.getRemark());
+            }
+
         }
         model.addAttribute("productAddDO",productAddDO);
         //获取商品类型

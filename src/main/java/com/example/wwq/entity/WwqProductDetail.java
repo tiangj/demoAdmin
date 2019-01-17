@@ -64,6 +64,7 @@ public class WwqProductDetail extends Model<WwqProductDetail> {
     /**
      * 是否删除
      */
+    @TableField("deleteFlag")
     private Integer deleteFlag;
 
     @TableField("post_date_id")
