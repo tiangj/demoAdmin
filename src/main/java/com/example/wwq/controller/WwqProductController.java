@@ -7,13 +7,9 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.example.config.ConstantUtil;
 import com.example.wwq.DO.ProductAddDO;
 import com.example.wwq.DO.ProductDO;
-import com.example.wwq.entity.WwqProduct;
-import com.example.wwq.entity.WwqProductFile;
-import com.example.wwq.entity.WwqSort;
+import com.example.wwq.entity.*;
 import com.example.wwq.kit.JSONResult;
-import com.example.wwq.service.IWwqProductFileService;
-import com.example.wwq.service.IWwqProductService;
-import com.example.wwq.service.IWwqSortService;
+import com.example.wwq.service.*;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +41,19 @@ public class WwqProductController {
     private IWwqProductService wwqProductService;
 
     @Autowired
+    private IWwqProductDetailService wwqProductDetailService;
+
+    @Autowired
     private IWwqProductFileService wwqProductFileService;
 
     @Autowired
     private IWwqSortService wwqSortService;
+
+    @Autowired
+    private IWwqPostDateService wwqPostDateService;
+
+    @Autowired
+    private IWwqPostWayService wwqPostWayService;
 
 
     /**
@@ -151,11 +156,32 @@ public class WwqProductController {
             productAddDO=new ProductAddDO();
         }else {
             productAddDO = wwqProductService.getProductById(id);
+            EntityWrapper<WwqProductDetail> detailEntityWrapper=new EntityWrapper<>();
+            detailEntityWrapper.eq("shop_product_id",id);
+            WwqProductDetail wwqProductDetail=wwqProductDetailService.selectOne(detailEntityWrapper);
+            productAddDO.setDeliveryAreaId(wwqProductDetail.getDeliveryAreaId());
+            productAddDO.setPostDateId(wwqProductDetail.getPostDateId());
+            productAddDO.setPostWayId(wwqProductDetail.getPostWayId());
+            productAddDO.setDetailId(wwqProductDetail.getId());
+            productAddDO.setDetailRemark(wwqProductDetail.getRemark());
         }
         model.addAttribute("productAddDO",productAddDO);
+        //获取商品类型
         EntityWrapper<WwqSort> entityWrapper=new EntityWrapper<>();
+        entityWrapper.eq("deleteFlag",0);
         List<WwqSort> sortList=wwqSortService.selectList(entityWrapper);
         model.addAttribute("sortList",sortList);
+        //获取配送方式枚举
+        EntityWrapper<WwqPostWay> postWayEntityWrapper=new EntityWrapper<>();
+        postWayEntityWrapper.eq("delete_flag",0);
+        List<WwqPostWay> postWayList=wwqPostWayService.selectList(postWayEntityWrapper);
+        model.addAttribute("postWayList",postWayList);
+        //获取配送时间枚举
+        EntityWrapper<WwqPostDate> postDateEntityWrapper=new EntityWrapper<>();
+        postDateEntityWrapper.eq("delete_flag",0);
+        List<WwqPostDate> postDateList=wwqPostDateService.selectList(postDateEntityWrapper);
+        model.addAttribute("postDateList",postDateList);
+
         return "product/add";
     }
 

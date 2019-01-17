@@ -66,6 +66,9 @@ public class WwqProductDetail extends Model<WwqProductDetail> {
      */
     private Integer deleteFlag;
 
+    @TableField("post_date_id")
+    private String postDateId;
+
 
     public String getId() {
         return id;
@@ -145,6 +148,18 @@ public class WwqProductDetail extends Model<WwqProductDetail> {
 
     public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getPostDateId() {
+        return postDateId;
+    }
+
+    public void setPostDateId(String postDateId) {
+        this.postDateId = postDateId;
     }
 
     public static final String ID = "id";

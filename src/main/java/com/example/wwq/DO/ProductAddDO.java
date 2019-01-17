@@ -6,11 +6,13 @@ public class ProductAddDO extends WwqProduct {
 
     private String detailId;
 
-    private Integer postWayId;
+    private String postWayId;
 
-    private Integer deliveryAreaId;
+    private String deliveryAreaId;
 
     private String detailRemark;
+
+    private String postDateId;
 
     public String getDetailId() {
         return detailId;
@@ -20,19 +22,19 @@ public class ProductAddDO extends WwqProduct {
         this.detailId = detailId;
     }
 
-    public Integer getPostWayId() {
+    public String getPostWayId() {
         return postWayId;
     }
 
-    public void setPostWayId(Integer postWayId) {
+    public void setPostWayId(String postWayId) {
         this.postWayId = postWayId;
     }
 
-    public Integer getDeliveryAreaId() {
+    public String getDeliveryAreaId() {
         return deliveryAreaId;
     }
 
-    public void setDeliveryAreaId(Integer deliveryAreaId) {
+    public void setDeliveryAreaId(String deliveryAreaId) {
         this.deliveryAreaId = deliveryAreaId;
     }
 
@@ -42,5 +44,13 @@ public class ProductAddDO extends WwqProduct {
 
     public void setDetailRemark(String detailRemark) {
         this.detailRemark = detailRemark;
+    }
+
+    public String getPostDateId() {
+        return postDateId;
+    }
+
+    public void setPostDateId(String postDateId) {
+        this.postDateId = postDateId;
     }
 }

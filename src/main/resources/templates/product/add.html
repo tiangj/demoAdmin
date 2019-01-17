@@ -125,8 +125,26 @@
         <div class="layui-inline">
             <label class="layui-form-label">配送方式</label>
             <div class="layui-input-block">
-                <input type="radio" name="postWayId" value="1" title="到店消费" th:checked="*{postWayId==1}">
-                <input type="radio" name="postWayId" value="2" title="快递配送" th:checked="*{postWayId==2}">
+                <select name="postWayId">
+                    <option th:each="list,userStat:${postWayList}" th:value="${list.id}" th:text="${list.postWayName}"
+                            th:selected="${list.id == productAddDO.postWayId}"></option>
+                </select>
+
+                <!--<input type="radio" name="postWayId" value="1" title="到店消费" th:checked="*{postWayId==1}">-->
+                <!--<input type="radio" name="postWayId" value="2" title="快递配送" th:checked="*{postWayId==2}">-->
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">配送时间</label>
+            <div class="layui-input-block">
+                <select name="postWayId">
+                    <option th:each="list,userStat:${postDateList}" th:value="${list.id}" th:text="${list.postDateName}"
+                            th:selected="${list.id == productAddDO.postDateId}"></option>
+                </select>
+
+                <!--<input type="radio" name="postWayId" value="1" title="到店消费" th:checked="*{postWayId==1}">-->
+                <!--<input type="radio" name="postWayId" value="2" title="快递配送" th:checked="*{postWayId==2}">-->
             </div>
         </div>
     </div>

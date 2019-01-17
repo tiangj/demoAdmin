@@ -132,6 +132,8 @@ public class WwqProductServiceImpl extends ServiceImpl<WwqProductMapper, WwqProd
             WwqProductDetail wwqProductDetail=new WwqProductDetail();
             wwqProductDetail.setShopProductId(wwqProduct.getId());
             wwqProductDetail.setPostWayId(productAddDO.getPostWayId()+"");
+            wwqProductDetail.setDeliveryAreaId(productAddDO.getDeliveryAreaId()+"");
+            wwqProductDetail.setPostDateId(productAddDO.getPostDateId());
             wwqProductDetail.setUpdateDate(new Date());
             wwqProductDetail.setUpdataUser(userId);
             if(productAddDO.getDetailId()==null || "".equals(productAddDO.getDetailId())){
