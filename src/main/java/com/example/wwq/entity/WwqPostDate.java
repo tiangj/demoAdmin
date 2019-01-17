@@ -6,6 +6,8 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 
 /**
@@ -39,6 +41,7 @@ public class WwqPostDate extends Model<WwqPostDate> {
     /**
      * 创建日期
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @TableField("create_date")
     private Date createDate;
     /**
@@ -49,6 +52,7 @@ public class WwqPostDate extends Model<WwqPostDate> {
     /**
      * 更新时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @TableField("update_date")
     private Date updateDate;
     /**
