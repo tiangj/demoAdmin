@@ -48,9 +48,9 @@ public class WwqPostWayController {
         wwqPostWayPage.setCurrent(page);
         EntityWrapper<WwqPostWay> wwqPostWayEntityWrapper=new EntityWrapper<>();
         if(StringUtils.isNotBlank(name)){
-            wwqPostWayEntityWrapper.like("name",name);
+            wwqPostWayEntityWrapper.like("post_way_name",name);
         }
-        wwqPostWayEntityWrapper.like("deleteFlag","0");
+        wwqPostWayEntityWrapper.eq("delete_flag","0");
         wwqPostWayEntityWrapper.orderBy("create_date",false);
 
         Page<WwqPostWay> postWayPage=wwqPostWayService.selectPage(wwqPostWayPage,wwqPostWayEntityWrapper);
