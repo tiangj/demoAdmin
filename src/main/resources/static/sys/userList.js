@@ -25,11 +25,11 @@ $(function () {
             , url: ctxPath + 'sysUser/listData'
             , cols: [[
                 {field: 'id', title: 'ID', width: '5%', sort: true, fixed: 'left'}
-                , {field: 'loginName', title: '账号', width: '15%'}
+                , {field: 'loginName', title: '账号', width: '10%'}
                 , {field: 'name', title: '用户名', width: '15%', sort: true}
                 , {field: 'email', title: '邮箱', width: '15%'}
                 , {field: 'phone', title: '手机号', width: '15%'}
-                , {field: 'createDate', title: '创建时间', width: '15%', sort: true}
+                , {field: 'createDate', title: '创建时间', width: '10%', sort: true}
                 , {
                     field: 'delFlag', title: '状态', width: '10%', sort: true, templet: function (d) {
                         if (d.delFlag == 0) {
@@ -40,10 +40,11 @@ $(function () {
                     }
                 }
                 , {
-                    filed: 'cz', title: '操作', width: '10%', templet: function (d) {
+                    filed: 'cz', title: '操作', width: '20%', templet: function (d) {
                         var html = "";
                         html += '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>';
                         html += '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
+                        html += '<a class="layui-btn layui-btn-xs" lay-event="editRole">编辑角色信息</a>';
                         return html;
                     }
                 }
@@ -57,7 +58,9 @@ $(function () {
             var data = obj.data;
             if (obj.event === 'detail') {
                 layer.msg('ID：' + data.id + ' 的查看操作');
-            } else if (obj.event === 'del') {
+            }else if(obj.event=='editRole'){
+                x_admin_show('修改用户角色信息', 'sysUser/editRole?id=' + data.id, 600, 400);
+            }else if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
 
                     $.ajax({

@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ISysUserRoleService extends IService<SysUserRole> {
 
+
+    public Integer saveUserRole(Integer userId,String roleId) throws Exception;
 }
