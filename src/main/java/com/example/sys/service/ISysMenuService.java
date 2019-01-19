@@ -1,7 +1,10 @@
 package com.example.sys.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.example.sys.DO.SysMenusListDO;
 import com.example.sys.entity.SysMenu;
 import com.baomidou.mybatisplus.service.IService;
+import com.example.wwq.DO.ProductDO;
 
 import java.util.List;
 import java.util.Map;
@@ -22,4 +25,7 @@ public interface ISysMenuService extends IService<SysMenu> {
      * @return
      */
     Map<String, Object> getMenusByUserId(String userId);
+
+    Page<SysMenusListDO> getAllMenus(Page<SysMenusListDO> page, SysMenusListDO sysMenusListDO);
+
 }

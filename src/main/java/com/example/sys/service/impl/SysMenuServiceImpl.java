@@ -1,5 +1,7 @@
 package com.example.sys.service.impl;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.example.sys.DO.SysMenusListDO;
 import com.example.sys.entity.SysMenu;
 import com.example.sys.mapper.SysMenuMapper;
 import com.example.sys.service.ISysMenuService;
@@ -44,5 +46,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         menusResult.put("firstMenusList",firstMenusList);
         menusResult.put("secondMenusList",secondMenusList);
         return menusResult;
+    }
+
+    @Override
+    public Page<SysMenusListDO> getAllMenus(Page<SysMenusListDO> page, SysMenusListDO sysMenusListDO) {
+        page.setRecords(sysMenuMapper.getAllMenus(page,sysMenusListDO));
+        return page;
     }
 }
