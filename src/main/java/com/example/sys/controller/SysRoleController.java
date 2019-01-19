@@ -1,12 +1,16 @@
 package com.example.sys.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.example.config.ConstantUtil;
+import com.example.sys.entity.SysMenu;
 import com.example.sys.entity.SysRole;
+import com.example.sys.entity.SysRoleMenu;
+import com.example.sys.service.ISysMenuService;
+import com.example.sys.service.ISysRoleMenuService;
 import com.example.sys.service.ISysRoleService;
-import com.example.wwq.entity.WwqSort;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -34,6 +35,12 @@ public class SysRoleController {
 
     @Autowired
     private ISysRoleService sysRoleService;
+
+    @Autowired
+    private ISysMenuService sysMenuService;
+
+    @Autowired
+    private ISysRoleMenuService sysRoleMenuService;
 
     /****
      * 跳转至权限list
@@ -138,6 +145,83 @@ public class SysRoleController {
         return result;
     }
 
+    @RequestMapping("editRoleMenu")
+    public String editRoleMenu(Model model,Integer id){
+        //获取所有的一级菜单
+        EntityWrapper<SysMenu> entityWrapper=new EntityWrapper<>();
+        entityWrapper.eq("del_flag",0);
+        entityWrapper.eq("parent_id","");
+        entityWrapper.orderBy("sort");
+        List<SysMenu> sysMenuFirstList=sysMenuService.selectList(entityWrapper);
+
+
+        //获取所有的二级菜单
+        EntityWrapper<SysMenu> entitySecondWrapper=new EntityWrapper<>();
+        entitySecondWrapper.addFilter("parent_id !=''");
+        entitySecondWrapper.eq("del_flag",0);
+        entitySecondWrapper.orderBy("sort");
+        List<SysMenu> sysMenuSecondList=sysMenuService.selectList(entitySecondWrapper);
+
+
+        //获取该角色下所有的菜单
+        EntityWrapper<SysRoleMenu> roleMenuEntityWrapper=new EntityWrapper<>();
+        roleMenuEntityWrapper.eq("role_id",id);
+        List<SysRoleMenu> sysRoleMenuList=sysRoleMenuService.selectList(roleMenuEntityWrapper);
+
+        List<Map<String,Object>> firstList=new ArrayList<>();
+        for(SysMenu sysMenu:sysMenuFirstList){
+            Map<String,Object> map=new HashMap<>();
+            map.put("id",sysMenu.getId());
+            map.put("name",sysMenu.getName());
+            map.put("open",false);
+            map.put("checked",false);
+            for(SysRoleMenu sysRoleMenu:sysRoleMenuList){
+                if(sysRoleMenu.getMenuId().equals(sysMenu.getId().toString())){
+                    map.put("checked",true);
+                }
+            }
+            firstList.add(map);
+        }
+
+        List<Map<String,Object>> secondList=new ArrayList<>();
+        for(SysMenu sysMenu:sysMenuSecondList){
+            Map<String,Object> map=new HashMap<>();
+            map.put("id",sysMenu.getId());
+            map.put("parentId",sysMenu.getParentId());
+            map.put("name",sysMenu.getName());
+            map.put("checked",false);
+            for(SysRoleMenu sysRoleMenu:sysRoleMenuList){
+                if(sysRoleMenu.getMenuId().equals(sysMenu.getId().toString())){
+                    map.put("checked",true);
+                }
+            }
+            secondList.add(map);
+        }
+
+        List<Map<String,Object>> list=new ArrayList<>();
+        for(Map<String,Object> mapFirst:firstList){
+            Map<String,Object> map=new HashMap<>();
+            List<Map<String,Object>> secondMenuList=new ArrayList<>();
+            for(Map<String,Object> mapSecond:secondList){
+                if(mapSecond.get("parentId").toString().equals(mapFirst.get("id").toString())){
+                    //mapFirst.put("checked",true);
+                    mapFirst.put("open",true);
+                    secondMenuList.add(mapSecond);
+                    mapFirst.put("children",secondMenuList);
+                }
+            }
+            map.putAll(mapFirst);
+            list.add(map);
+        }
+
+        SysRole sysRole=sysRoleService.selectById(id);
+
+        model.addAttribute("menusList", JSON.toJSON(list));
+        model.addAttribute("roleId",id);
+        model.addAttribute("sysRole",sysRole);
+
+        return "sys/editRoleMenu";
+    }
 
 }
 

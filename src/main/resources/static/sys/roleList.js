@@ -15,6 +15,7 @@ layui.use('table', function () {
                     var html = "";
                     html += '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>';
                     html += '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
+                    html += '<a class="layui-btn layui-btn-xs" lay-event="editMenu">编辑角色菜单信息</a>';
                     return html;
                 }
             }
@@ -51,8 +52,10 @@ layui.use('table', function () {
 
             });
         }else if (obj.event === 'edit') {
-            x_admin_show('修改权限名称', 'sysRole/toAdd?id=' + data.id, 800, 600);
+            x_admin_show('修改角色信息', 'sysRole/toAdd?id=' + data.id, 800, 600);
             //图片上传页面
+        }else if(obj.event=='editMenu'){
+            x_admin_show('修改角色菜单信息', 'sysRole/editRoleMenu?id=' + data.id, 800, 600);
         }
     });
 
