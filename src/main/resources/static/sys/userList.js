@@ -44,7 +44,7 @@ $(function () {
                         var html = "";
                         html += '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>';
                         html += '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
-                        html += '<a class="layui-btn layui-btn-xs" lay-event="editRole">编辑角色信息</a>';
+                        html += '<a class="layui-btn layui-btn-xs" lay-event="editRole">编辑用户角色信息</a>';
                         return html;
                     }
                 }
