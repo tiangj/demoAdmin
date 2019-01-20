@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ISysRoleMenuService extends IService<SysRoleMenu> {
 
+    public Integer saveRoleMenu(Integer roleId,String menuIds) throws Exception ;
+
 }

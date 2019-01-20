@@ -218,7 +218,7 @@ public class SysRoleController {
 
         model.addAttribute("menusList", JSON.toJSON(list));
         model.addAttribute("roleId",id);
-        model.addAttribute("sysRole",sysRole);
+        model.addAttribute("name",sysRole.getName());
 
         return "sys/editRoleMenu";
     }
