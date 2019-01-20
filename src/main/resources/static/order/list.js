@@ -11,8 +11,8 @@ layui.use('table', function () {
             ,{field: 'productId', hide: true}
             ,{field: 'orderId', hide: true}
             , {field: 'nickName', title: '用户昵称', width: '8%', sort: true}
-            , {field: 'productName', title: '商品名称', width: '12%', sort: true}
-            , {field: 'orderNum', title: '商品数', width: '8%'}
+            , {field: 'productName', title: '商品名称', width: '10%', sort: true}
+            , {field: 'orderNum', title: '商品数', width: '6%'}
             , {field: 'orderTotalNum', title: '订单总金额', width: '8%'}
             , {field: 'orderStatus', title: '订单状态', width: '8%', templet: function (d) {
                         //100：未支付；200：已支付；300：门店备货；400：发货；500：评价；600：订单完成
@@ -40,7 +40,7 @@ layui.use('table', function () {
                    }
                }
             , {field: 'message', title: '买家留言', width: '15%'}
-            , {field: 'createDate', title: '创建时间', width: '15%', sort: true}
+            , {field: 'createDate', title: '创建时间', width: '10%', sort: true}
             , {
                 filed: 'cz', title: '操作', width: '20%', templet: function (d) {
                     var html = "";
