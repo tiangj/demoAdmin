@@ -75,7 +75,7 @@ public class WwqPostDateController {
     }
 
     @ResponseBody
-    @RequestMapping("savePostWay")
+    @RequestMapping("savePostDate")
     public Map<String,Object> savePostDate(WwqPostDate wwqPostDate, HttpServletRequest request){
         String userId=request.getSession().getAttribute(ConstantUtil.SEESION_USER_ID).toString();
 

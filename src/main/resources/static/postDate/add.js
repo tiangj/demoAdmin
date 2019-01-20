@@ -8,7 +8,7 @@ layui.use(['form','layer'], function() {
     //监听提交
     form.on('submit(add)', function(data){
         $.ajax({
-            url:ctxPath+'wwqPostWay/savePostWay',
+            url:ctxPath+'wwqPostDate/savePostDate',
             method:'post',
             data:data.field,
             dataType:'JSON',
