@@ -235,6 +235,31 @@ public class WwqProductController {
     @RequestMapping("addProductPic")
     public String addProductPic(Model model,String id){
         model.addAttribute("id",id);
+        EntityWrapper<WwqProductFile> logoProductFileEntityWrapper=new EntityWrapper<>();
+        logoProductFileEntityWrapper.eq("product_id",id);
+        logoProductFileEntityWrapper.eq("file_type",0);
+        logoProductFileEntityWrapper.eq("deleteFlag",0);
+        List<WwqProductFile> logoProductFileList=wwqProductFileService.selectList(logoProductFileEntityWrapper);
+
+        EntityWrapper<WwqProductFile> picDetailProductFileEntityWrapper=new EntityWrapper<>();
+        picDetailProductFileEntityWrapper.eq("product_id",id);
+        picDetailProductFileEntityWrapper.eq("file_type",1);
+        picDetailProductFileEntityWrapper.eq("deleteFlag",0);
+        List<WwqProductFile> picDetailProductFileList=wwqProductFileService.selectList(picDetailProductFileEntityWrapper);
+
+        EntityWrapper<WwqProductFile> productDetailFileEntityWrapper=new EntityWrapper<>();
+        productDetailFileEntityWrapper.eq("product_id",id);
+        productDetailFileEntityWrapper.eq("file_type",2);
+        productDetailFileEntityWrapper.eq("deleteFlag",0);
+        List<WwqProductFile> productDetailFileList=wwqProductFileService.selectList(productDetailFileEntityWrapper);
+
+        model.addAttribute("logoProductFileList",logoProductFileList);
+        model.addAttribute("logoSize",logoProductFileList.size());
+        model.addAttribute("picDetailProductFileList",picDetailProductFileList);
+        model.addAttribute("picDetailSize",picDetailProductFileList.size());
+        model.addAttribute("productDetailFileList",productDetailFileList);
+        model.addAttribute("productDetailSize",productDetailFileList.size());
+
         return "product/addPic";
     }
 

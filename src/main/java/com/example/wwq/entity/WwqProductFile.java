@@ -61,6 +61,7 @@ public class WwqProductFile extends Model<WwqProductFile> {
     /**
      * 是否删除
      */
+    @TableField("deleteFlag")
     private Integer deleteFlag;
 
 

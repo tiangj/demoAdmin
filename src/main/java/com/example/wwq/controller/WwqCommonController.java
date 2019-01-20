@@ -66,6 +66,7 @@ public class WwqCommonController {
             result.put("msg","成功");
             result.put("picUrl",lists);
 
+
             for(String string:lists){
                 //保持图片信息至数据库
                 if("product".equals(type)){

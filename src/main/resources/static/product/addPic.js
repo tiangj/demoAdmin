@@ -66,7 +66,7 @@ layui.use('upload', function() {
         ,before: function(obj){
             //预读本地文件示例，不支持ie8
             obj.preview(function(index, file, result){
-                $('#productDetailDiv').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                $('#productDetailDiv').append('<span><img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img"></span>')
             });
         }
         ,done: function(res){
@@ -85,3 +85,24 @@ layui.use('upload', function() {
     });
 
 });
+
+function delPic(obj) {
+    var picFileId=obj.parentNode.id;
+    console.log(picFileId);
+    $.ajax({
+        url:ctxPath+'wwqProductFile/delPic',
+        method:'post',
+        data:{id:picFileId},
+        dataType:'JSON',
+        success:function(res){
+            if(res.code==1){
+                $("#"+picFileId).css("display","none");
+                layer.msg(res.msg,{icon:6});
+            }else{
+                layer.msg(res.msg,{icon:5});
+            }
+
+        }
+    })
+
+}

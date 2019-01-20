@@ -43,7 +43,6 @@ public class FileUpload {
                 }
             }
         }
-        System.out.println(picUrl);
         return picUrl;
     }
 
