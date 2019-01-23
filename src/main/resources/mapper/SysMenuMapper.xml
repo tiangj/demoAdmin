@@ -27,7 +27,7 @@
     </sql>
 
     <select id="getMenusByUserId" resultType="java.util.Map" parameterType="java.lang.String">
-            select  sm.id as menuId,sm.href,sm.parent_id,sm.name as menuName,sm.icon from sys_user su
+            select DISTINCT  sm.id as menuId,sm.href,sm.parent_id,sm.name as menuName,sm.icon,sm.sort from sys_user su
             left JOIN sys_user_role sur on sur.user_id=su.id
             left join sys_role sr on sr.id=sur.role_id
             left join sys_role_menu srm on srm.role_id=sr.id

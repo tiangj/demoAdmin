@@ -62,7 +62,7 @@ public class WwqShareCountController {
     }
 
     @ResponseBody
-    @RequestMapping("viewShareUserList")
+    @RequestMapping("shareUserListData")
     public Map<String,Object> shareUserListData(Integer page, Integer limit,String userId){
         Page<WwqShareUserListDO> shareUserListDOPage=new Page<>();
         shareUserListDOPage.setCurrent(page);

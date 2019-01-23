@@ -25,7 +25,7 @@
     <select id="getAllShareCount" parameterType="com.example.wwq.DO.WwqShareCountDO" resultType="com.example.wwq.DO.WwqShareCountDO">
         SELECT
             sc.user_id as userId,u.nickname as userName,sc.user_level as userLevel,sc.first_share_num as firstShareNum,
-            sc.second_share_num as secondShareNum,sc.create_date as creatDate,sc.remark
+            sc.second_share_num as secondShareNum,sc.create_date as createDate,sc.remark
         FROM
             wwq_share_count sc
             LEFT JOIN wwq_user u ON u.id = sc.user_id
