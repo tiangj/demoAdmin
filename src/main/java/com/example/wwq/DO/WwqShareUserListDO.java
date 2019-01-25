@@ -4,6 +4,8 @@ public class WwqShareUserListDO {
 
     private String userId;
 
+    private String openId;
+
     private String userName;
 
     /*****
@@ -55,5 +57,13 @@ public class WwqShareUserListDO {
 
     public void setParentUserName(String parentUserName) {
         this.parentUserName = parentUserName;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 }

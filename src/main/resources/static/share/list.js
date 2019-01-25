@@ -9,6 +9,7 @@ layui.use('table', function () {
         , cols: [[
             {field: 'userId', hide: true}
             ,{field: 'shareId', hide: true}
+            ,{field: 'openId', hide: true}
             , {field: 'userName', title: '用户名', width: '15%', sort: true}
             , {field: 'userLevel', title: '用户分销等级', width: '20%', sort: true, templet: function (d) {
                     if(d.userLevel==1){
@@ -38,13 +39,14 @@ layui.use('table', function () {
         , done: function (res, curr, count) {
             $("[data-field='userId']").css('display', 'none');
             $("[data-field='shareId']").css('display', 'none');
+            $("[data-field='openId']").css('display', 'none');
         }
     });
     //监听工具条
     table.on('tool(share)', function (obj) {
         var data = obj.data;
         if (obj.event === 'view') {
-            x_admin_show('查看分销用户详情', 'wwqShareCount/toViewShareUser?userId=' + data.userId, 800, 600);
+            x_admin_show('查看分销用户详情', 'wwqShareCount/toViewShareUser?userId=' + data.userId+"&openId="+data.openId, 800, 600);
             //图片上传页面
         }
     });

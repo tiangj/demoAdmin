@@ -5,7 +5,7 @@ layui.use('table', function () {
     table.render({
         elem: '#LAY_table_shareUser'
         , url: ctxPath + 'wwqShareCount/shareUserListData'
-        , where:{userId:$("#userId").val()}
+        , where:{userId:$("#userId").val(),openId:$("#openId").val()}
         , cols: [[
             {field: 'userId', hide: true}
             , {field: 'userName', title: '用户名', width: '20%', sort: true}

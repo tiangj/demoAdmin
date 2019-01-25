@@ -56,19 +56,21 @@ public class WwqShareCountController {
     }
 
     @RequestMapping("toViewShareUser")
-    public String toViewShareUser(Model model,String userId){
+    public String toViewShareUser(Model model,String userId,String openId){
         model.addAttribute("userId",userId);
+        model.addAttribute("openId",openId);
         return "share/viewShareUserList";
     }
 
     @ResponseBody
     @RequestMapping("shareUserListData")
-    public Map<String,Object> shareUserListData(Integer page, Integer limit,String userId){
+    public Map<String,Object> shareUserListData(Integer page, Integer limit,String userId,String openId){
         Page<WwqShareUserListDO> shareUserListDOPage=new Page<>();
         shareUserListDOPage.setCurrent(page);
         shareUserListDOPage.setLimit(limit);
         WwqShareUserListDO shareUserListDO=new WwqShareUserListDO();
         shareUserListDO.setUserId(userId);
+        shareUserListDO.setOpenId(openId);
         Page<WwqShareUserListDO> pageList=shareCountService.getShareUserList(shareUserListDOPage,shareUserListDO);
         Map<String,Object> result=new HashMap<>();
         result.put("code",0);

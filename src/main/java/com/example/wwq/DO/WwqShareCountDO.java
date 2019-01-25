@@ -10,6 +10,8 @@ public class WwqShareCountDO {
 
     private String userId;
 
+    private String openId;
+
     private String userName;
 
     private String userLevel;
@@ -85,5 +87,13 @@ public class WwqShareCountDO {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 }
