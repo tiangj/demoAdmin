@@ -120,6 +120,7 @@ public class WwqProductServiceImpl extends ServiceImpl<WwqProductMapper, WwqProd
             wwqProduct.setUpdateDate(new Date());
             wwqProduct.setUpdateUser(userId);
             wwqProduct.setProductType(productAddDO.getProductType());
+            wwqProduct.setRecommendBoutique(productAddDO.getRecommendBoutique());
             if(productAddDO.getId()==null || "".equals(productAddDO.getId())){
                 wwqProduct.setCreateDate(new Date());
                 wwqProduct.setCreateUser(userId);
