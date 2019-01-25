@@ -37,19 +37,24 @@
     </select>
 
     <select id="getShareUserList" resultType="com.example.wwq.DO.WwqShareUserListDO" parameterType="com.example.wwq.DO.WwqShareUserListDO">
-        select 1 as level,suc.user_id as userId,u.nickname as userName,sc.user_level as userLevel,up.nickname as parentUserName from wwq_share_user_concart suc
-            left join wwq_user u on u.id=suc.user_id
+
+        select 1 as level,
+            suc.user_id as userId,up.nickname as userName,up.headimgurl,u.nickname as parentUserName
+        from wwq_share_user_concart suc
+            left join wwq_user u on u.open_id=suc.parent_id
             left join wwq_share_count sc on sc.user_id=u.id
-            left join wwq_user up on up.id=suc.parent_id
-        where parent_id=#{userId}
+            left join wwq_user up on up.id=suc.user_id
+        where parent_id='#{userId}'
 
         union
 
-        select 2 as level,suc.user_id as userId,u.nickname as userName,sc.user_level as userLevel,up.nickname as parentUserName from wwq_share_user_concart suc
-            left join wwq_user u on u.id=suc.user_id
-            left join wwq_share_count sc on sc.user_id=u.id
-            left join wwq_share_user_concart sucp on suc.parent_id=sucp.user_id
-            left join wwq_user up on up.id=suc.parent_id
-        where sucp.parent_id=#{userId}
+        select 2 as level,wu.id as userId,wu.nickname as userName,wu.headimgurl,u.nickname as parentUserName from
+                wwq_share_user_concart suc
+            left join  wwq_user u on u.id=suc.user_id
+            left join  wwq_share_user_concart psuc on psuc.parent_id=u.open_id
+						left join  wwq_user wu on wu.id=psuc.user_id
+
+            where suc.parent_id='#{userId}'
+
     </select>
 </mapper>
