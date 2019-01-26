@@ -65,9 +65,9 @@ layui.use('table', function () {
     table.on('tool(order)', function (obj) {
         var data = obj.data;
         if(obj.event==='viewOrderDetail'){
-            x_admin_show('查看订单信息', ctxPath+'wwqOrder/showOrderDetail?orderId=' + data.orderId, 800, 500);
+            x_admin_show('查看订单信息', 'wwqOrder/showOrderDetail?orderId=' + data.orderId, 800, 500);
         }else if(obj.event=='sendProduct'){
-            showTip('sendProduct',"确认对"+data.nickName+"的"+data.productName+"进行发货",ctxPath+'wwqOrder/sendProduct?orderId='+data.orderId);
+            showTip('sendProduct',"确认对"+data.nickName+"的"+data.productName+"进行发货",'wwqOrder/sendProduct?orderId='+data.orderId);
          }
     });
 
