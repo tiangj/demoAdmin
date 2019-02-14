@@ -5,6 +5,7 @@ import com.example.wwq.DO.ProductDO;
 import com.example.wwq.DO.UserListDO;
 import com.example.wwq.entity.WwqUser;
 import com.baomidou.mybatisplus.service.IService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -18,4 +19,5 @@ public interface IWwqUserService extends IService<WwqUser> {
 
     Page<UserListDO> getAllUser(Page<UserListDO> page, UserListDO userListDO);
 
+    boolean batchImport(String fileName, MultipartFile file) throws Exception;
 }

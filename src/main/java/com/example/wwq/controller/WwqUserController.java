@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,6 +58,24 @@ public class WwqUserController {
         result.put("count",pageList.getTotal());
         result.put("data",pageList.getRecords());
         return result;
+    }
+
+    @RequestMapping("importUserPage")
+    public String importUserPage(){
+        return "user/importUserPage";
+    }
+
+    @ResponseBody
+    @RequestMapping("importUserExcel")
+    public Map<String,Object> importUserExcel(@RequestParam("file") MultipartFile file){
+        boolean a = false;
+        String fileName = file.getOriginalFilename();
+        try {
+            a = wwqUserService.batchImport(fileName, file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 
