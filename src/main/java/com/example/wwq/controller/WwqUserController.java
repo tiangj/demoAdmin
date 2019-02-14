@@ -68,14 +68,25 @@ public class WwqUserController {
     @ResponseBody
     @RequestMapping("importUserExcel")
     public Map<String,Object> importUserExcel(@RequestParam("file") MultipartFile file){
+        Map<String,Object> result=new HashMap<>();
+
         boolean a = false;
         String fileName = file.getOriginalFilename();
         try {
             a = wwqUserService.batchImport(fileName, file);
+            if(a){
+                result.put("code",1);
+                result.put("msg","导入成功");
+            }else{
+                result.put("code",0);
+                result.put("msg","导入失败");
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            result.put("code",1);
+            result.put("msg",e);
         }
-        return null;
+        return result;
     }
 }
 
