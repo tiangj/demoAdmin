@@ -91,6 +91,9 @@ public class WwqUser extends Model<WwqUser> {
      */
     private Integer deleteFlag;
 
+    @TableField("level_up")
+    private String levelUp;
+
 
     public String getId() {
         return id;
@@ -220,6 +223,14 @@ public class WwqUser extends Model<WwqUser> {
         this.deleteFlag = deleteFlag;
     }
 
+    public String getLevelUp() {
+        return levelUp;
+    }
+
+    public void setLevelUp(String levelUp) {
+        this.levelUp = levelUp;
+    }
+
     public static final String ID = "id";
 
     public static final String OPEN_ID = "open_id";
@@ -252,6 +263,8 @@ public class WwqUser extends Model<WwqUser> {
 
     public static final String DELETEFLAG = "deleteFlag";
 
+    public static final String LEVELUP="level_up";
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -276,6 +289,7 @@ public class WwqUser extends Model<WwqUser> {
         ", updateDate=" + updateDate +
         ", updateUser=" + updateUser +
         ", deleteFlag=" + deleteFlag +
+        ",levelUp="+levelUp+
         "}";
     }
 }

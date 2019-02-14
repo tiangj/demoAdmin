@@ -20,6 +20,7 @@
         <result column="update_date" property="updateDate" />
         <result column="update_user" property="updateUser" />
         <result column="deleteFlag" property="deleteFlag" />
+        <result column="level_up" property="levelUp"></result>
     </resultMap>
 
     <!-- 通用查询结果列 -->

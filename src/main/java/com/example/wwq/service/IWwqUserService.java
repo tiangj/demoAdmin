@@ -20,4 +20,6 @@ public interface IWwqUserService extends IService<WwqUser> {
     Page<UserListDO> getAllUser(Page<UserListDO> page, UserListDO userListDO);
 
     boolean batchImport(String fileName, MultipartFile file) throws Exception;
+
+
 }
