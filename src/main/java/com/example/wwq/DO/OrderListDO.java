@@ -35,6 +35,16 @@ public class OrderListDO {
 
     private String message;
 
+    private String userLevel;
+
+    public String getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(String userLevel) {
+        this.userLevel = userLevel;
+    }
+
     public String getUserId() {
         return userId;
     }

@@ -11,6 +11,19 @@ layui.use('table', function () {
             ,{field: 'productId', hide: true}
             ,{field: 'orderId', hide: true}
             , {field: 'nickName', title: '用户昵称', width: '8%', sort: true}
+            , {field: 'userLevel', title: '用户等级', width: '8%', sort: true,templet: function (d) {
+                    if(d.userLevel==1){
+                        return "泉人";
+                    }
+                    if(d.userLevel==2){
+                        return "泉仙";
+                    }
+                    if(d.userLevel==3){
+                        return "泉祖";
+                    }
+
+                }
+              }
             , {field: 'productName', title: '商品名称', width: '10%', sort: true}
             , {field: 'orderNum', title: '商品数', width: '6%'}
             , {field: 'orderTotalNum', title: '订单总金额', width: '8%'}
@@ -48,6 +61,9 @@ layui.use('table', function () {
                     if(d.payStatus==200 && (d.orderStatus==200 || d.orderStatus==300)){
                         html += '<a class="layui-btn layui-btn-xs" lay-event="sendProduct">发货</a>';
                     }
+                    if(d.userLevel==1){
+                        html += '<a class="layui-btn layui-btn-xs" lay-event="levelUp">晋级泉仙</a>';
+                    }
                     return html;
                 }
             }
@@ -67,15 +83,19 @@ layui.use('table', function () {
         if(obj.event==='viewOrderDetail'){
             x_admin_show('查看订单信息', 'wwqOrder/showOrderDetail?orderId=' + data.orderId, 800, 500);
         }else if(obj.event=='sendProduct'){
-            showTip('sendProduct',"确认对"+data.nickName+"的"+data.productName+"进行发货",'wwqOrder/sendProduct?orderId='+data.orderId);
-         }
+            showTip('sendProduct',"确认对"+data.nickName+"的"+data.productName+"进行发货",ctxPath+'wwqOrder/sendProduct?orderId='+data.orderId);
+         }else if(obj.event=='levelUp'){
+            showTip('levelUp',"确认对"+data.nickName+"升级为泉仙",ctxPath+'wwqOrder/levelUp?userId='+data.userId);
+        }
     });
 
     var $ = layui.$, active = {
         reload: function () {
             var productName = $('#productName').val();
+            var userName=$("#userName").val();
             var data = {
-                productName: productName
+                productName: productName,
+                userName:userName
             }
             //执行重载
             table.reload('testReload', {

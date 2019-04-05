@@ -1,12 +1,15 @@
 package com.example.wwq.controller;
 
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.example.wwq.DO.OrderListDO;
 import com.example.wwq.entity.WwqOrder;
 import com.example.wwq.entity.WwqOrderDetail;
+import com.example.wwq.entity.WwqShareCount;
 import com.example.wwq.service.IWwqOrderDetailService;
 import com.example.wwq.service.IWwqOrderService;
+import com.example.wwq.service.IWwqShareCountService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -38,6 +41,9 @@ public class WwqOrderController {
 
     @Autowired
     private IWwqOrderDetailService wwqOrderDetailService;
+
+    @Autowired
+    private IWwqShareCountService shareCountService;
 //
 //    /**
 //     * 从购物车下预定单
@@ -146,13 +152,16 @@ public class WwqOrderController {
 
     @ResponseBody
     @RequestMapping("listData")
-    public Map<String,Object> listData(Integer page, Integer limit,String productName){
+    public Map<String,Object> listData(Integer page, Integer limit,String productName,String userName){
         Page<OrderListDO> orderListDOPage=new Page<>();
         orderListDOPage.setLimit(limit);
         orderListDOPage.setCurrent(page);
         OrderListDO orderListDO=new OrderListDO();
         if(StringUtils.isNotBlank(productName)){
             orderListDO.setProductName(productName);
+        }
+        if(StringUtils.isNotBlank(userName)){
+            orderListDO.setNickName(userName);
         }
         Page<OrderListDO> pageList=wwqOrderService.getAllOrder(orderListDOPage,orderListDO);
         Map<String,Object> result=new HashMap<>();
@@ -181,6 +190,37 @@ public class WwqOrderController {
             result.put("code",0);
             result.put("msg","操作失败");
         }
+        return result;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("levelUp")
+    public Map<String,Object> levelUp(String userId){
+        Map<String,Object> result=new HashMap<>();
+        Boolean resultFlag=false;
+        try {
+            EntityWrapper<WwqShareCount> entityWrapper=new EntityWrapper<>();
+            entityWrapper.eq("user_id",userId);
+            entityWrapper.eq("delete_flag",0);
+            WwqShareCount wwqShareCount=shareCountService.selectOne(entityWrapper);
+            if(wwqShareCount!=null){
+                wwqShareCount.setUserLevel(2);
+                resultFlag=shareCountService.updateById(wwqShareCount);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("code",0);
+            result.put("msg","操作失败");
+        }
+        if (resultFlag){
+            result.put("code",1);
+            result.put("msg","操作成功");
+        }else{
+            result.put("code",0);
+            result.put("msg","操作失败");
+        }
+
         return result;
     }
 }

@@ -94,16 +94,20 @@
                     p.product_name as productName,o.product_id as productId,
                     o.id as orderId,o.order_num as orderNum,o.order_total_price as orderTotalNum,
                     o.post_way_type as postWayType,o.order_status as orderStatus,o.pay_status as payStatus,o.create_date as createDate,
-                    d.post_date_name as postDate,a.address,o.message
+                    d.post_date_name as postDate,a.address,o.message,sc.user_level as userLevel
         from wwq_order o
             left join wwq_user u on u.id=o.user_id
             left join wwq_product p on p.id=o.product_id
             left join wwq_address a on a.id=o.address_id
             left join wwq_post_date d on d.id=o.post_date_id
-            where o.delete_flag=0
+            left join wwq_share_count sc on sc.user_id=u.id
+        where o.delete_flag=0
             <if test="productName!=null and productName!=''">
                 and p.product_name like '%${productName}%'
             </if>
+        <if test="nickName!=null and nickName!=''">
+            and u.nickname like '%${nickName}%'
+        </if>
     </select>
 
     <select id="getOrderById" parameterType="java.lang.String" resultType="com.example.wwq.DO.OrderListDO">
