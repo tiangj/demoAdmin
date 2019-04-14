@@ -83,12 +83,16 @@ public class WwqPostWayController {
         Boolean flag=false;
         Map<String,Object> result=new HashMap<>();
         if(StringUtils.isNotBlank(wwqPostWay.getId())){
-            wwqPostWay.setCreateDate(new Date());
-            wwqPostWay.setUpdateDate(new Date());
+            //wwqPostWay.setCreateDate(new Date());
+            //wwqPostWay.setUpdateDate(new Date());
             wwqPostWay.setCreateUser(userId);
             wwqPostWay.setUpdateUser(userId);
             flag=wwqPostWayService.updateById(wwqPostWay);
         }else{
+            wwqPostWay.setCreateDate(new Date());
+            wwqPostWay.setUpdateDate(new Date());
+            wwqPostWay.setCreateUser(userId);
+            wwqPostWay.setUpdateUser(userId);
             flag=wwqPostWayService.insert(wwqPostWay);
         }
         if(flag){

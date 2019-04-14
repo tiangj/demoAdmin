@@ -82,12 +82,16 @@ public class WwqPostDateController {
         Boolean flag=false;
         Map<String,Object> result=new HashMap<>();
         if(StringUtils.isNotBlank(wwqPostDate.getId())){
-            wwqPostDate.setCreateDate(new Date());
-            wwqPostDate.setUpdateDate(new Date());
+            //wwqPostDate.setCreateDate(new Date());
+            //wwqPostDate.setUpdateDate(new Date());
             wwqPostDate.setCreateUser(userId);
             wwqPostDate.setUpdateUser(userId);
             flag=wwqPostDateService.updateById(wwqPostDate);
         }else{
+            wwqPostDate.setCreateDate(new Date());
+            wwqPostDate.setUpdateDate(new Date());
+            wwqPostDate.setCreateUser(userId);
+            wwqPostDate.setUpdateUser(userId);
             flag=wwqPostDateService.insert(wwqPostDate);
         }
         if(flag){
