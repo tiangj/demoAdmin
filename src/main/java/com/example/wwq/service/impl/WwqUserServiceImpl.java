@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.Date;
 
 /**
  * <p>
@@ -118,8 +119,21 @@ public class WwqUserServiceImpl extends ServiceImpl<WwqUserMapper, WwqUser> impl
                     WwqShareUserConcart wwqShareUserConcart=new WwqShareUserConcart();
                     wwqShareUserConcart.setUserId(wwqUser.getId());
                     wwqShareUserConcart=wwqShareUserConcartMapper.selectOne(wwqShareUserConcart);
-                    wwqShareUserConcart.setParentId(recommendWwqUser.getOpenId());
-                    wwqShareUserConcartMapper.updateById(wwqShareUserConcart);
+                    if(wwqShareUserConcart==null){
+                        wwqShareUserConcart=new WwqShareUserConcart();
+                        wwqShareUserConcart.setUserId(wwqUser.getId());
+                        wwqShareUserConcart.setParentId(recommendWwqUser.getOpenId());
+                        wwqShareUserConcart.setCreateDate(new Date());
+                        wwqShareUserConcart.setUpdateDate(new Date());
+                        wwqShareUserConcart.setCreateUser(wwqUser.getId());
+                        wwqShareUserConcart.setUpdateUser(wwqUser.getId());
+                        wwqShareUserConcartMapper.insert(wwqShareUserConcart);
+                    }else {
+                        wwqShareUserConcart.setParentId(recommendWwqUser.getOpenId());
+                        wwqShareUserConcart.setUpdateDate(new Date());
+                        wwqShareUserConcart.setUpdateUser(wwqUser.getId());
+                        wwqShareUserConcartMapper.updateById(wwqShareUserConcart);
+                    }
 
                 }
 
