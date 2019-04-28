@@ -118,7 +118,7 @@ public class WwqUserServiceImpl extends ServiceImpl<WwqUserMapper, WwqUser> impl
                     WwqShareUserConcart wwqShareUserConcart=new WwqShareUserConcart();
                     wwqShareUserConcart.setUserId(wwqUser.getId());
                     wwqShareUserConcart=wwqShareUserConcartMapper.selectOne(wwqShareUserConcart);
-                    wwqShareUserConcart.setParentId(recommendWwqUser.getId());
+                    wwqShareUserConcart.setParentId(recommendWwqUser.getOpenId());
                     wwqShareUserConcartMapper.updateById(wwqShareUserConcart);
 
                 }
